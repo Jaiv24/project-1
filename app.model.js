@@ -14,4 +14,9 @@ async function getAllPatients() {
     const result = await db.all('SELECT rowid, * FROM Patients');
     return result;
 }
-module.exports = { makeConnection, getAllPatients }
+
+async function deletePatient(id) {
+    await db.run('DELETE FROM Patients WHERE rowid = ?', id);
+}
+
+module.exports = { makeConnection, getAllPatients, deletePatient }

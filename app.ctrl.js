@@ -12,8 +12,21 @@ app.set("views", __dirname + '/views');
 
 Model.makeConnection();
 
+app.get("/delete/:id", async (req, res) => {
 
-app.get("/api", async (req, res) => {
+  await Model.deletePatient(req.params.id);
+
+  const patientArray = await Model.getAllPatients();
+
+  const TPL = {
+    title: 'Patients App',
+    patients: patientArray
+  }
+
+  res.render('mypage', TPL)
+});
+
+app.get("/", async (req, res) => {
     const patientArray = await Model.getAllPatients();
 
     const TPL = {

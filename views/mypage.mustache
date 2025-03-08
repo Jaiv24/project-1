@@ -21,6 +21,7 @@
                 <th>Contact</th>
                 <th>Medical History</th>
                 <th>Visit Status</th>
+                <th> Delete </th>
    
             </tr>
         </thead>
@@ -33,6 +34,7 @@
                 <td>{{ contact }}</td>
                 <td>{{ medical_history  }}</td>
                 <td>{{ visit_status }}</td>
+                <td> <a href = "/delete/{{ id }}"> <button type="button" class="btn btn-danger">Delete</button>  </a></td>
             </tr>
             {{/patients}}
         </tbody>

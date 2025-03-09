@@ -34,5 +34,11 @@ async function updateVisitStatus(id, status) {
     await db.run('UPDATE Patients SET visit_status = ? WHERE rowid = ?', status, id);
 }
 
+async function updatePatient(id, data) {
+    await db.run(
+        'UPDATE Patients SET name = ?, dob = ?, contact = ?, medical_history = ? WHERE rowid = ?',
+        [data.name, data.dob, data.contact, data.medical_history, id]
+    );
+}
 
-module.exports = { makeConnection, getAllPatients, deletePatient, getPatientById, createPatient, updateVisitStatus }
+module.exports = { makeConnection, getAllPatients, deletePatient, getPatientById, createPatient, updateVisitStatus, updatePatient }

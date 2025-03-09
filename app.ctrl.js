@@ -43,6 +43,33 @@ app.get("/patient/:id", async (req, res) => {
 }
 );
 
+app.get("/edit/:id", async (req, res) => {
+  const patient = await Model.getPatientById(req.params.id);
+  const TPL = {
+      title: 'Edit Patient',
+      patient,
+      isEdit: true
+  };
+  res.render('patientForm', TPL);
+}
+);
+
+app.post("/edit/:id", async (req, res) => {
+  const errors = validateForm(req.body);
+  if (Object.keys(errors).length > 0) {
+      const TPL = {
+          title: 'Edit Patient',
+          isEdit: true,
+          patient: req.body,
+          errors
+      };
+      return res.render('patientForm', TPL);
+  }
+
+  await Model.updatePatient(req.params.id, req.body);
+  res.redirect('/');
+});
+
 app.get("/add", async (req, res) => {
   const TPL = {
       title: 'Add New Patient',
@@ -74,7 +101,9 @@ app.get("/delete/:id", async (req, res) => {
   const patientArray = await Model.getAllPatients();
     const allPatients = patientArray.map((patient, index) => ({
         ...patient,
-        index: index + 1
+        index: index + 1,
+        isVisited: patient.visit_status === "Visited",
+        isNotVisited: patient.visit_status === "Not Visited"
     }));
     const TPL = {
         title: 'Patients App',

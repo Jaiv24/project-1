@@ -49,8 +49,8 @@
                     <br /> 
                     <form action="/update-status/{{ id }}" method="POST" class="d-inline">
                         <select name="visit_status" class="form-select form-select-sm d-inline w-auto">
-                            <option value="Visited" {{#visit_status}}selected{{/visit_status}}>Visited</option>
-                            <option value="Not Visited" {{^visit_status}}selected{{/visit_status}}>Not Visited</option>
+                            <option value="Visited" {{#isVisited}}selected{{/isVisited}}>Visited</option>
+                            <option value="Not Visited" {{#isNotVisited}}selected{{/isNotVisited}}>Not Visited</option>
                         </select>
                         <button type="submit" class="btn btn-success btn-sm">Update</button>
                     </form>

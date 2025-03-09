@@ -20,7 +20,9 @@ app.get("/", async (req, res) => {
     const patientArray = await Model.getAllPatients();
     const allPatients = patientArray.map((patient, index) => ({
         ...patient,
-        index: index + 1
+        index: index + 1,
+        isVisited: patient.visit_status === "Visited",
+        isNotVisited: patient.visit_status === "Not Visited"
     }));
     const TPL = {
         title: 'Patients App',
@@ -79,6 +81,11 @@ app.get("/delete/:id", async (req, res) => {
         patients: allPatients
     };
     res.render('mypage', TPL)
+});
+
+app.post("/update-status/:id", async (req, res) => {
+  await Model.updateVisitStatus(req.params.id, req.body.visit_status);
+  res.redirect('/');
 });
 
 

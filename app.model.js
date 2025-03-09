@@ -30,5 +30,9 @@ async function createPatient(data) {
         [data.name, data.dob, data.contact, data.medical_history, new Date().toISOString(), 'Not Visited']
     );
 }
+async function updateVisitStatus(id, status) {
+    await db.run('UPDATE Patients SET visit_status = ? WHERE rowid = ?', status, id);
+}
 
-module.exports = { makeConnection, getAllPatients, deletePatient, getPatientById, createPatient }
+
+module.exports = { makeConnection, getAllPatients, deletePatient, getPatientById, createPatient, updateVisitStatus }

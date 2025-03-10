@@ -134,12 +134,29 @@ app.post("/update-status/:id", async (req, res) => {
 });
 
 
+app.get("/search", async (req, res) => {
+  const query = req.query.q || '';
+  const patientArray = await Model.searchPatient(query);
+  const numberedPatients = patientArray.map((patient, index) => ({
+      ...patient,
+      displayNumber: index + 1,
+      isVisited: patient.visit_status === "Visited",
+      isNotVisited: patient.visit_status === "Not Visited"
+  }));
+  const TPL = {
+      title: 'Search Results - Patient Management System',
+      patients: numberedPatients,
+      searchQuery: query
+  };
+  res.render('mypage', TPL); 
+});
+
+
+
+
 app.get(/^(.+)$/, (req, res) => {
   res.sendFile(__dirname + req.params[0]);
 }); 
-
-
-
 
 // Form validation
 function validateForm(data) {

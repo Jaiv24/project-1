@@ -41,4 +41,9 @@ async function updatePatient(id, data) {
     );
 }
 
-module.exports = { makeConnection, getAllPatients, deletePatient, getPatientById, createPatient, updateVisitStatus, updatePatient }
+async function searchPatient(name) {
+    const result = await db.all('SELECT rowid, * FROM Patients WHERE name LIKE ?', `%${name}%`);
+    return result;
+}
+
+module.exports = { makeConnection, getAllPatients, deletePatient, getPatientById, createPatient, updateVisitStatus, updatePatient, searchPatient }

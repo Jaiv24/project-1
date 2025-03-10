@@ -54,6 +54,22 @@ app.get("/edit/:id", async (req, res) => {
 }
 );
 
+app.get("/report", async (req, res) => {
+  const patientId = req.query.id; 
+  if (!patientId) {
+      return res.redirect('/'); 
+  }
+  const patient = await Model.getPatientById(patientId);
+  if (!patient) {
+      return res.status(404).send('Patient not found');
+  }
+  const TPL = {
+      title: `Patient Report - ${patient.name}`,
+      patient
+  };
+  res.render('patientReport', TPL);
+});
+
 app.post("/edit/:id", async (req, res) => {
   const errors = validateForm(req.body);
   if (Object.keys(errors).length > 0) {

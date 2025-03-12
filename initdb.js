@@ -13,27 +13,27 @@ db.serialize(function() {
          "visit_status TEXT)");
   
   db.run("INSERT INTO Patients (name, dob, contact, medical_history, created_at, visit_status) VALUES (?,?,?,?,?,?)",
-    ["John Doe", "1985-05-15", "555-123-4567", 
+    ["John Doe", "1985-05-15", "5551234567", 
      "No major issues. Occasional headaches.", 
      new Date().toISOString(), "Visited"]);
   
   db.run("INSERT INTO Patients (name, dob, contact, medical_history, created_at, visit_status) VALUES (?,?,?,?,?,?)",
-    ["Jane Smith", "1990-10-08", "555-987-6543", 
+    ["Jane Smith", "1990-10-08", "5559876543", 
      "Allergic to penicillin. Asthma.", 
      new Date().toISOString(), "Not Visited"]);
   
   db.run("INSERT INTO Patients (name, dob, contact, medical_history, created_at, visit_status) VALUES (?,?,?,?,?,?)",
-    ["Robert Johnson", "1978-03-22", "555-333-2222", 
+    ["Robert Johnson", "1978-03-22", "5553332222", 
      "Hypertension. Takes medication daily.", 
      new Date().toISOString(), "Visited"]);
      
   db.run("INSERT INTO Patients (name, dob, contact, medical_history, created_at, visit_status) VALUES (?,?,?,?,?,?)",
-    ["Maria Garcia", "1992-07-14", "555-444-5555", 
+    ["Maria Garcia", "1992-07-14", "5554445555", 
      "Recent surgery (2023). Follow-up scheduled.", 
      new Date().toISOString(), "Visited"]);
      
   db.run("INSERT INTO Patients (name, dob, contact, medical_history, created_at, visit_status) VALUES (?,?,?,?,?,?)",
-    ["David Brown", "1965-12-01", "555-666-7777", 
+    ["David Brown", "1965-12-01", "5556667777", 
      "Diabetes type 2. Regular checkups required.", 
      new Date().toISOString(), "Not Visited"]);
      
